@@ -1,0 +1,81 @@
+---
+
+---
+
+<div
+  class="flex flex-wrap container mx-auto gap-4 mb-6 justify-center *:xl:max-w-lg"
+>
+  <div
+    id="counter"
+    class="flex gap-8 md:gap-16 xl:gap-32 justify-center items-center font-bold text-5xl lg:text-6xl *:flex *:flex-col text-center *:gap-2 font-serif"
+  >
+    <span>00<span class="text-counter">Días</span></span><span
+      >00<span class="text-counter">Horas</span></span
+    ><span>00<span class="text-counter">Min</span></span><span
+      >00<span class="text-counter">Seg</span></span
+    >
+  </div>
+</div>
+
+<style is:inline>
+  .text-counter {
+    font-weight: 100;
+    font-family: serif;
+    font-size: large;
+  }
+</style>
+
+<script is:inline>
+  // Fecha objetivo - CAMBIAR A LA FECHA CORRECTA
+  const targetDate = new Date("January 09, 2027 10:00:00").getTime();
+
+  let countdownInterval;
+
+  // Función que actualiza el contador
+  function updateCountdown(targetDate, textEnd, idElement) {
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+
+    const element = document.getElementById(idElement);
+    if (!element) return;
+
+    if (timeLeft > 0) {
+      const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+      let hours = Math.floor(
+        (timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+      );
+      let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+
+      element.innerHTML = `
+          <span>${days}<span class="text-counter">Días</span></span
+          ><span>${hours}<span class="text-counter">Horas</span></span
+          ><span>${minutes}<span class="text-counter">Min</span></span
+          ><span>${seconds}<span class="text-counter">Seg</span></span>
+        `;
+    } else {
+      element.innerHTML = `<span></span><span></span><span></span><span class="text-center">${textEnd}</span><span></span><span></span><span></span>`;
+      clearInterval(countdownInterval);
+    }
+  }
+
+  // Actualizar el contador cada segundo
+  countdownInterval = setInterval(() => {
+    updateCountdown(targetDate, "¡Nos Casamos!", "counter");
+  }, 1000);
+
+  // Ejecutar una vez inmediatamente
+  updateCountdown(targetDate, "¡Nos Casamos!", "counter");
+</script>
