@@ -1,9 +1,36 @@
 ---
-
+import fincaElMilagro from '../../assets/images/cuadro.png';
 ---
 
-<section class="bg-bgwhite text-primary p-4 lg:p-0 leading-relaxed text-pretty">
-  <p class="text-center text-xl lg:text-2xl 2xl:text-3xl italic font-bold container mx-auto mb-2">
+<section
+  class="bg-bgwhite text-primary px-6 py-16 lg:px-8 pt-0 leading-relaxed text-pretty flex flex-col items-center gap-4"
+>
+  <div
+    class="-translate-y-3 md:-translate-y-6 bg-primary text-white rounded-full px-3 py-1 text-sm z-10 md:text-lg md:px-4 md:py-2 hover:bg-primary/80 transition-colors"
+    id="calendar-button"
+  >
+    <a
+      id="google-calendar-btn"
+      href="https://www.google.com/calendar/render?action=TEMPLATE&text=Boda%20de%20Brenda%20y%20Carlos&dates=20270109T100000/20270109T120000&details=Matrimonio%20de%20Brenda%20y%20Carlos&location=Iglesia"
+      target="_blank"
+      rel="noopener noreferrer"
+      class=""
+    >
+      AGENDAR FECHA
+    </a>
+    <a
+      id="apple-calendar-btn"
+      href="data:text/calendar;charset=utf-8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ASUMMARY:Boda%20de%20Brenda%20y%20Carlos%0ADTSTART:20270109T100000%0ADTEND:20270109T120000%0ADESCRIPTION:Matrimonio%20de%20Brenda%20y%20Carlos%0ALOCATION:Iglesia%0AEND:VEVENT%0AEND:VCALENDAR"
+      download="boda-brenda-carlos.ics"
+      class="hidden"
+    >
+      AGENDAR FECHA
+    </a>
+  </div>
+
+  <p
+    class="text-center text-xl lg:text-2xl 2xl:text-3xl italic font-bold container mx-auto mb-2"
+  >
     “Hay encuentros que parecen casualidad, pero siempre fueron providencia.”
   </p>
 
@@ -12,4 +39,40 @@
     historia. Y ahora, con alegría, elegimos hacer un pacto delante de Él y
     compartir ese momento con quienes han
   </p>
+
+  <article
+    class="bg-primary mt-12 p-8 lg:p-20 lg:mt-8 flex flex-col items-center gap-1 text-center container mx-auto"
+  >
+    <h2 class="text-4xl lg:text-5xl 2xl:text-6xl font-bold text-white italic">
+      Finca El Milagro
+    </h2>
+    <p class="text-white italic text-base lg:text-lg 2xl:text-xl">
+      Ruta 51 km Nº15 Campo Quijano Salta
+    </p>
+
+    <p class="text-white text-base lg:text-lg 2xl:text-xl mt-8">
+      La finca del milagro es el lugar donde daremos el “sí” que trasciende una
+      ceremonia: será el inicio de una alianza que deseamos construir sobre la
+      fe, la gracia y el amor de Cristo. Es un espacio quedado en el tiempo que
+      nos representa a ambos y lo que más nos gusta, mucha naturaleza y belleza
+      local.
+    </p>
+
+    <img src={fincaElMilagro.src} alt="Finca El Milagro" class="mt-6" />
+
+    <a href="https://maps.app.goo.gl/s7Aq62bMzKQBhug6A" class="bg-primary text-white rounded-full px-3 py-1 text-sm z-10 md:text-lg md:px-4 md:py-2 hover:bg-black/20 transition-colors border border-white mt-4">
+      CÓMO LLEGAR
+    </a>
+  </article>
 </section>
+
+<script is:inline>
+  const isAppleDevice = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
+  const googleBtn = document.getElementById("google-calendar-btn");
+  const appleBtn = document.getElementById("apple-calendar-btn");
+
+  if (isAppleDevice) {
+    googleBtn.classList.add("hidden");
+    appleBtn.classList.remove("hidden");
+  }
+</script>
