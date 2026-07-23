@@ -27,17 +27,94 @@
   font-style: normal;
 }
 
-.fadeIn {
-  animation: fadeIn 1.25s ease-in;
+
+
+body, html, * {
+    text-wrap: pretty;
+    scroll-behavior: smooth;
+}
+
+.fadeIn p, .fadeIn h2 {
+  animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+.fadeIn p:nth-child(1) {
+  opacity: 0;
+  animation-delay: 0s;
+}
+
+.fadeIn p:nth-child(2) {
+  opacity: 0;
+  animation-delay: 0.4s;
+}
+
+.fadeIn p:nth-child(3) {
+  opacity: 0;
+  animation-delay: 0.6s;
+}
+
+.fadeIn p:nth-child(4) {
+  opacity: 0;
+  animation-delay: 0.8s;
+}
+
+.fadeIn p:nth-child(5) {
+  opacity: 0;
+  animation-delay: 1s;
+}
+
+.fadeIn p:nth-child(6) {
+  opacity: 0;
+  animation-delay: 1.2s;
+}
+
+.fadeIn p:nth-child(7) {
+  opacity: 0;
+  animation-delay: 1.4s;
+}
+
+.fadeIn p:nth-child(8) {
+  opacity: 0;
+  animation-delay: 1.6s;
+}
+
+.fadeIn p:nth-child(9) {
+  opacity: 0;
+  animation-delay: 1.8s;
+}
+
+.fadeIn p:nth-child(10) {
+  opacity: 0;
+  animation-delay: 2s;
 }
 
 @keyframes fadeIn {
   from {
+    transform: translateY(20px) scale(1.1);
     opacity: 0;
-    transform: translateY(20px);
   }
   to {
+    transform: translateY(0px) scale(1);
     opacity: 1;
-    transform: translateY(0);
   }
+}
+
+@keyframes fade-in-up {
+  from {
+    transform: translateY(10%) scale(1);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+}
+
+.card {
+  opacity: 0;
+}
+
+.card.show {
+  animation: fade-in-up 0.6s ease-in-out forwards;
+  animation-delay: 0.15s;
 }

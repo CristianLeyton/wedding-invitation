@@ -17,7 +17,35 @@ import "../styles/global.css";
     />
     <title>Brenda y Carlos</title>
   </head>
-  <body class="playfair-400">
+  <body class="playfair-400 overflow-x-hidden">
     <slot />
   </body>
 </html>
+
+<script>
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            entry.target.classList.add("fadeIn");
+          }
+        });
+      },
+      { threshold: 0.1 },
+    );
+
+    const cards = document.querySelectorAll(".card");
+
+    cards.forEach((card) => observer.observe(card));
+
+    document.addEventListener(
+      "astro:before-swap",
+      () => {
+        cards.forEach((card) => observer.unobserve(card));
+        observer.disconnect();
+      },
+      { once: true },
+    );
+</script>
