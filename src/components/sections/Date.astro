@@ -12,14 +12,12 @@ import Counter from "../Counter.astro";
       <p class="font-bold text-5xl lg:text-6xl 2xl:text-7xl">¡Nos casamos!</p>
     </div>
   </div>
-  <div class="text-center bg-bgwhite semicircle p-8 text-primary">
+  <div class="text-center bg-bgwhite semicircle p-2 sm:p-8 text-primary -z-10 flex flex-col items-center ">
     <CalendarIcon class="size-6 mx-auto" />
     <p class="text-lg font-bold lg:text-2xl">9 de Enero</p>
-    <p class="text-xs lg:text-base mb-2">AGENDÁ LA FECHA</p>
+    <p class="text-xs lg:text-base -mb-1 sm:mb-2 lg:mb-0">AGENDÁ LA FECHA</p>
 
     <Counter />
-    
-    
   </div>
 </section>
 
@@ -32,3 +30,14 @@ import Counter from "../Counter.astro";
     margin: 0 auto;
   }
 </style>
+
+<script is:inline>
+  const isAppleDevice = /iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent);
+  const googleBtn = document.getElementById("google-calendar-btn");
+  const appleBtn = document.getElementById("apple-calendar-btn");
+
+  if (isAppleDevice) {
+    googleBtn.classList.add("hidden");
+    appleBtn.classList.remove("hidden");
+  }
+</script>
