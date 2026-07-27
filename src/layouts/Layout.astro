@@ -16,6 +16,24 @@ import "../styles/global.css";
       rel="stylesheet"
     />
     <title>Brenda y Carlos</title>
+
+    <!-- Open Graph / Redes Sociales -->
+    <meta
+      property="og:title"
+      content="Brenda y Carlos - ¡Nos casamos!"
+    />
+    <meta
+      property="og:description"
+      content="Brenda y Carlos - ¡Nos casamos! Vení a celebrar con nosotros."
+    />
+    <meta
+      property="og:image"
+      content="http://brendaycarlos.vercel.app/"
+    />
+    <meta property="og:url" content="http://brendaycarlos.vercel.app/brendaycarlos.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Brenda y Carlos" />
   </head>
   <body class="playfair-400 overflow-x-hidden">
     <slot />
@@ -23,29 +41,28 @@ import "../styles/global.css";
 </html>
 
 <script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          entry.target.classList.add("fadeIn");
+        }
+      });
+    },
+    { threshold: 0.1 },
+  );
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            entry.target.classList.add("fadeIn");
-          }
-        });
-      },
-      { threshold: 0.1 },
-    );
+  const cards = document.querySelectorAll(".card");
 
-    const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => observer.observe(card));
 
-    cards.forEach((card) => observer.observe(card));
-
-    document.addEventListener(
-      "astro:before-swap",
-      () => {
-        cards.forEach((card) => observer.unobserve(card));
-        observer.disconnect();
-      },
-      { once: true },
-    );
+  document.addEventListener(
+    "astro:before-swap",
+    () => {
+      cards.forEach((card) => observer.unobserve(card));
+      observer.disconnect();
+    },
+    { once: true },
+  );
 </script>
