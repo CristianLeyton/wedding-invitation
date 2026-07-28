@@ -1,13 +1,11 @@
 ---
-
+import Soga from "../Soga.astro";
 ---
 
 <section class="bg-primary h-dvh">
-  <div
-    class="text-white container mx-auto grid place-items-center h-full px-6 "
-  >
+  <div class="text-white container mx-auto grid place-items-center h-full px-6">
     <div
-      class="text-center text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl leading-relaxed border-2 border-white p-8 md:p-18 h-[90%] w-full flex gap-5 flex-col justify-center card"
+      class="text-center items-center text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl leading-relaxed border-2 border-white p-8 md:p-18 h-[90%] w-full flex gap-5 flex-col justify-center card"
       id="welcome-text"
     >
       <p>
@@ -21,6 +19,9 @@
         > para formar un cordón que el tiempo <span class="italic font-bold"
           >no podrá romper.</span
         >
+      </p>
+      <p>
+        <Soga className="w-64 md:w-80 self-center" />
       </p>
     </div>
   </div>

@@ -4,6 +4,7 @@ import Counter from "../Counter.astro";
 import firstImageDesktop from "../../assets/images/firts_image_desktop_2.webp";
 import firstImageMobile from "../../assets/images/firts_image_mobile_2.webp";
 import semicirculo from "../../assets/images/semicirculo.png";
+import semicirculoMobile from "../../assets/images/semicirculo_mobile.png";
 ---
 
 <section class="bg-bggray h-dvh overflow-hidden p-12 lg:p-0 relative z-0">
@@ -19,12 +20,12 @@ import semicirculo from "../../assets/images/semicirculo.png";
         class="w-full h-full object-cover"
       />
     </picture>
-    <!--     <div
+    <div
       class="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,#360d13_100%)]"
     >
-    </div> -->
+    </div>
 
-    <div class="text-center mb-12 sm:mb-18 md:mb-24 lg:mb-32 2xl:mb-44 card">
+    <div class="text-center lg:mb-16 card">
       <p class="italic text-lg lg:text-xl 2xl:text-2xl">Brenda y Carlos</p>
       <p class="font-bold text-4xl md:text-5xl lg:text-6xl 2xl:text-7xl">
         ¡Nos casamos!
@@ -35,13 +36,20 @@ import semicirculo from "../../assets/images/semicirculo.png";
 
 <section class="bg-primary h-fit py-5 relative">
   <!--  bg-[linear-gradient(180deg,#f9f1e6_0%,#f9f1e6_60%,transparent_70%)] semicircle -->
-  <img
-    src={semicirculo.src}
-    alt="semicirculo"
-    class="w-full h-full object-cover absolute inset-0 card z-0"
-  />
+
+  <picture class="">
+
+    <source srcset={semicirculo.src} media="(min-width: 620px)" />
+    <source srcset={semicirculoMobile.src} media="(max-width: 620px)" />
+    <img
+      src={semicirculo.src}
+      alt="semicirculo"
+      class="w-full h-full object-cover absolute inset-0 card z-10"
+    />
+  </picture>
+
   <div
-    class="text-center p-4 sm:p-8 lg:p-4 2xl:p-8 text-primary flex flex-col items-center justify-start"
+    class="text-center p-4 sm:p-6 lg:p-4 2xl:p-6 text-primary flex flex-col items-center justify-start"
   >
     <CalendarIcon
       class="size-5 md:size-7 lg:size-5 2xl:size-7 mx-auto relative z-10"
@@ -50,7 +58,7 @@ import semicirculo from "../../assets/images/semicirculo.png";
       9 de Enero - 17:00hs
     </p>
     <div
-      class="bg-primary text-white rounded-full px-3 py-1 text-xs z-30 md:text-sm md:px-4 md:py-2 hover:bg-primary/80 transition-colors w-fit my-1 md:my-2"
+      class="bg-primary text-white rounded-full px-3 py-1 text-xs z-30 md:text-sm md:px-4 md:py-2 hover:bg-primary/80 transition-colors w-fit my-1 md:my-4"
       id="calendar-button"
     >
       <a

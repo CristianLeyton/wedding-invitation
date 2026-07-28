@@ -1,5 +1,6 @@
 ---
-import fincaElMilagro from "../../assets/images/cuadro2.png";
+import nosotros from "../../assets/images/nosotros_desktop.webp";
+import nosotrosMobile from "../../assets/images/nosotros_mobile.webp";
 ---
 
 <section
@@ -25,7 +26,11 @@ import fincaElMilagro from "../../assets/images/cuadro2.png";
       <span class="mt-4">Eclesiastés 4:12</span>
     </p>
 
-    <img src={fincaElMilagro.src} alt="Finca El Milagro" class="mt-2" />
+    <picture>
+      <source srcset={nosotros.src} media="(min-width: 768px)" />
+      <source srcset={nosotrosMobile.src} media="(max-width: 768px)" />
+      <img src={nosotros.src} alt="Nosotros" class="mt-2" />
+    </picture>
 
     <p class="text-primary text-lg lg:text-xl 2xl:text-2xl mt-6">
       Nuestro deseo no es solamente unir nuestras vidas. Es permitir que Cristo
