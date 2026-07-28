@@ -1,12 +1,12 @@
 ---
-
+import hogar from "../../assets/images/hogar.png";
 ---
 
 <section
-  class="bg-primary text-bgwhite py-16 px-6 lg:px-8 leading-relaxed text-pretty flex flex-col items-center gap-4 text-center"
+  class="bg-bgwhite py-8 px-6 lg:px-8 leading-relaxed text-pretty flex flex-col items-center gap-4 text-center"
 >
   <div
-    class="container mx-auto px-6 flex flex-col justify-center items-center card"
+    class="container mx-auto flex flex-col justify-center items-center card bg-primary text-bgwhite py-10 px-8 corner-shape"
   >
     <h2 class="text-4xl lg:text-5xl 2xl:text-6xl font-bold italic">
       Nuestro primer hogar
@@ -18,10 +18,10 @@
       “Los hogares más hermosos no comienzan con paredes, sino con un pacto.”
     </p>
 
-    <p
-      class="text-bgwhite mt-4 card flex flex-col"
-    >
-      <p class="text-base lg:text-lg 2xl:text-xl mb-1">Estamos comenzando nuestra vida juntos desde cero.</p>
+    <p class="text-bgwhite mt-4 card flex flex-col">
+      <p class="text-base lg:text-lg 2xl:text-xl mb-1">
+        Estamos comenzando nuestra vida juntos desde cero.
+      </p>
       <p class="text-base lg:text-lg 2xl:text-xl mb-1">
         Cada sueño, cada proyecto y cada rincón del hogar que construiremos
         llevará consigo el recuerdo de quienes caminaron a nuestro lado desde el
@@ -31,7 +31,7 @@
         Por eso, hemos elegido que el valor de la tarjeta sea una manera de
         acompañarnos en este nuevo comienzo.
       </p>
-      <p class="text-base lg:text-lg 2xl:text-xl mb-1" >
+      <p class="text-base lg:text-lg 2xl:text-xl mb-1">
         Más que una colaboración, será una parte de la historia que empezaremos
         a escribir como familia.
       </p>
@@ -39,58 +39,18 @@
         Gracias por sembrar junto a nosotros los primeros cimientos de este
         hogar.
       </p>
-    </p>
 
-    <div class="card">
-      <h2 class="text-4xl lg:text-5xl 2xl:text-6xl font-bold italic mt-12">
-        Tarjetas
-      </h2>
-
-      <p
-        class="flex items-center justify-between gap-2 w-full lg:w-180 text-xl md:text-2xl 2xl:text-3xl p-4 mt-4"
-      >
-        <span>Tarjeta general (adulto)</span>
-        <span class="font-bold font-sans">$80.000</span>
+      <p>
+        <img src={hogar.src} alt="Hogar" class="max-w-64 md:max-w-72 lg:max-w-96 mt-8" />
       </p>
-      <p
-        class="flex items-center justify-between gap-2 w-full lg:w-180 text-xl md:text-2xl 2xl:text-3xl p-4 border-t border-bgwhite"
-      >
-        <span
-          >Tarjeta infantil <br />
-          <span class="text-xs lg:text-sm 2xl:text-base block"
-            >(de 4 a 12 años - menores 4 no pagan)</span
-          >
-        </span>
-        <span class="font-bold font-sans">$40.000</span>
-      </p>
-    </div>
-    <article class="flex flex-col md:flex-row gap-8 mt-12 md:max-w-4xl">
-      <div class="border border-bgwhite p-5 rounded-2xl text-left card">
-        <h3 class="text-xl lg:text-2xl 2xl:text-3xl font-bold mb-3 italic">
-          Pago único
-        </h3>
-        <p class="text-sm lg:text-base 2xl:text-lg">
-          Podés abonar el valor total de tu tarjeta mediante <span
-            class="font-bold italic">transferencia bancaria</span
-          > o <span class="font-bold italic">tarjeta de crédito</span>, de la
-          manera que te resulte más cómoda.
-        </p>
-      </div>
-      <div class="border border-bgwhite p-5 rounded-2xl text-left card">
-        <h3 class="text-xl lg:text-2xl 2xl:text-3xl font-bold mb-3 italic">
-          Pago financiado
-        </h3>
-        <p class="text-sm lg:text-base 2xl:text-lg">
-          Si preferís distribuir el importe, podrás adherirte a un plan de
-          cuotas mediante suscripción, abonando el valor de tu tarjeta en pagos
-          mensuales hasta la fecha de la boda.
-        </p>
-      </div>
-    </article>
-
-    <p class="text-bgwhite text-lg lg:text-xl 2xl:text-2xl mt-10">
-      “Gracias por ser parte del comienzo de esta historia. Cada gesto de amor
-      nos ayuda a construir el hogar con el que tanto soñamos.”
     </p>
   </div>
 </section>
+
+
+<style>
+  .corner-shape {
+    border-radius: 35px;
+    corner-shape: scoop;
+  }
+</style>

@@ -1,0 +1,304 @@
+---
+import WhatsAppIcon from "../icons/WhatsAppIcon.astro";
+import Modal from "../Modal.astro";
+
+const WEDDING_DATE = new Date("2027-01-09T23:59:59");
+
+const INSTALLMENT_PLANS = [
+  { months: 5, url: "https://mpago.la/1DUSRGA" },
+  { months: 4, url: "https://mpago.la/2dMdWYr" },
+  { months: 3, url: "https://mpago.la/13znwTJ" },
+];
+
+const TRANSFER_ALIAS = "brendaycarlos2027";
+const WHATSAPP_NUMBER = "543874081090";
+const WHATSAPP_DISPLAY = "3874 08-1090";
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, adjunto el comprobante de pago de la tarjeta.")}`;
+
+function getPlanDeadline(weddingDate: Date, months: number): Date {
+  const deadline = new Date(weddingDate);
+  deadline.setMonth(deadline.getMonth() - months);
+  return deadline;
+}
+
+function isPlanAvailable(deadline: Date, now = new Date()): boolean {
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const limit = new Date(
+    deadline.getFullYear(),
+    deadline.getMonth(),
+    deadline.getDate(),
+  );
+  return today <= limit;
+}
+
+const availablePlans = INSTALLMENT_PLANS.map((plan) => ({
+  ...plan,
+  deadline: getPlanDeadline(WEDDING_DATE, plan.months),
+})).filter((plan) => isPlanAvailable(plan.deadline));
+---
+
+<section
+  class="bg-primary text-bgwhite px-6 pt-8 lg:px-8 leading-relaxed text-pretty flex flex-col items-center gap-4"
+>
+  <div class="card">
+    <h2 class="text-4xl lg:text-5xl 2xl:text-6xl font-bold italic text-center">
+      Tarjetas
+    </h2>
+
+    <p
+      class="flex items-center justify-between gap-2 w-full lg:w-180 text-xl md:text-2xl 2xl:text-3xl p-4 mt-4"
+    >
+      <span>Tarjeta general (adulto)</span>
+      <span class="font-bold font-sans">$80.000</span>
+    </p>
+    <p
+      class="flex items-center justify-between gap-2 w-full lg:w-180 text-xl md:text-2xl 2xl:text-3xl p-4 border-t border-bgwhite"
+    >
+      <span
+        >Tarjeta infantil <br />
+        <span class="text-xs lg:text-sm 2xl:text-base block"
+          >(de 4 a 12 años - menores 4 no pagan)</span
+        >
+      </span>
+      <span class="font-bold font-sans">$40.000</span>
+    </p>
+  </div>
+  <article class="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:max-w-4xl">
+    <button
+      type="button"
+      data-modal-target="modal-pago-unico"
+      class="border bg-bgwhite text-primary p-5 text-left card hover:scale-105 transition-all duration-300 cursor-pointer"
+    >
+      <div class="corner-shape border border-primary p-5">
+        <h3 class="text-2xl lg:text-3xl 2xl:text-4xl font-bold mb-3 italic">
+          Pago único
+        </h3>
+        <p class="text-base lg:text-lg 2xl:text-xl">
+          Podés abonar el valor total de tu tarjeta mediante <span
+            class="font-bold italic">transferencia bancaria</span
+          > o <span class="font-bold italic">tarjeta de crédito</span>, de la
+          manera que te resulte más cómoda.
+        </p>
+      </div>
+    </button>
+    <button
+      type="button"
+      data-modal-target="modal-pago-financiado"
+      class="border bg-bgwhite text-primary p-5 text-left card hover:scale-105 transition-all duration-300 cursor-pointer"
+    >
+      <div class="corner-shape border border-primary p-5">
+        <h3 class="text-2xl lg:text-3xl 2xl:text-4xl font-bold mb-3 italic">
+          Pago financiado
+        </h3>
+        <p class="text-base lg:text-lg 2xl:text-xl">
+          Si preferís distribuir el importe, podrás adherirte a un plan de
+          cuotas mediante suscripción, abonando el valor de tu tarjeta en pagos
+          mensuales hasta la fecha de la boda.
+        </p>
+      </div>
+    </button>
+  </article>
+
+  <p class="text-bgwhite text-lg lg:text-xl 2xl:text-2xl mt-10 text-center">
+    “Gracias por ser parte del comienzo de esta historia. Cada gesto de amor nos
+    ayuda a construir el hogar con el que tanto soñamos.”
+  </p>
+</section>
+
+<Modal id="modal-pago-unico" title="Pago único">
+  <p class="text-base lg:text-lg mb-6">
+    El pago único se realiza mediante <span class="font-bold italic"
+      >transferencia bancaria</span
+    > al siguiente alias:
+  </p>
+  <div
+    class="flex items-center justify-between gap-3 border border-primary rounded-xl p-4"
+  >
+    <span
+      id="transfer-alias"
+      class="text-xl lg:text-2xl font-bold font-sans break-all"
+    >
+      {TRANSFER_ALIAS}
+    </span>
+    <button
+      type="button"
+      id="copy-alias-btn"
+      class="shrink-0 border border-primary px-4 py-2 text-sm font-bold hover:bg-primary hover:text-bgwhite transition-colors cursor-pointer rounded-lg"
+    >
+      Copiar
+    </button>
+  </div>
+  <p class="text-base lg:text-lg mt-6 mb-4">
+    Una vez realizado el pago, enviá el comprobante al siguiente número:
+    <span class="font-bold font-sans"> {WHATSAPP_DISPLAY}</span>
+  </p>
+  <a
+    href={WHATSAPP_URL}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center justify-center gap-2 w-full border border-primary px-4 py-3 text-base font-bold hover:bg-primary hover:text-bgwhite transition-colors rounded-xl"
+  >
+    <WhatsAppIcon />
+
+    Enviar comprobante
+  </a>
+</Modal>
+
+<Modal id="modal-pago-financiado" title="Pago financiado">
+  <p class="text-base lg:text-lg mb-6">
+    <p class="font-bold">
+      Con financiación la tarjeta queda en <span class="font-bold">$85.000</span
+      > finales.
+    </p>
+
+    Elegí el plan de cuotas que prefieras. Cada opción te lleva al link de pago
+    correspondiente en Mercado Pago.
+  </p>
+  <ul id="installment-plans-list" class="flex flex-col gap-3 mt-4">
+    {
+      INSTALLMENT_PLANS.map((plan) => {
+        const deadline = getPlanDeadline(WEDDING_DATE, plan.months);
+        return (
+          <li
+            class="installment-plan"
+            data-deadline={deadline.toISOString()}
+            hidden={!isPlanAvailable(deadline)}
+          >
+            <a
+              href={plan.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between gap-4 border border-primary p-4 rounded-xl hover:bg-primary hover:text-bgwhite transition-colors"
+            >
+              <span class="text-lg lg:text-xl font-bold italic">
+                {plan.months} meses
+              </span>
+              <span class="text-sm font-bold">Pagar →</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <p
+    id="no-plans-message"
+    class="text-base lg:text-lg italic"
+    hidden={availablePlans.length > 0}
+  >
+    Ya no hay planes de cuotas disponibles. Contactanos para coordinar el pago.
+  </p>
+</Modal>
+
+<style>
+  .corner-shape {
+    border-radius: 18px;
+    corner-shape: scoop;
+  }
+</style>
+
+<script>
+  let lastTrigger: HTMLButtonElement | null = null;
+
+  function isPlanAvailableClient(deadlineIso: string): boolean {
+    const deadline = new Date(deadlineIso);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const limit = new Date(
+      deadline.getFullYear(),
+      deadline.getMonth(),
+      deadline.getDate(),
+    );
+    return today <= limit;
+  }
+
+  function updateInstallmentPlans() {
+    const plans = document.querySelectorAll<HTMLLIElement>(".installment-plan");
+    let visibleCount = 0;
+
+    plans.forEach((plan) => {
+      const deadline = plan.dataset.deadline;
+      if (!deadline) return;
+
+      const available = isPlanAvailableClient(deadline);
+      plan.hidden = !available;
+      if (available) visibleCount += 1;
+    });
+
+    const noPlansMessage = document.getElementById("no-plans-message");
+    if (noPlansMessage) {
+      noPlansMessage.hidden = visibleCount > 0;
+    }
+  }
+
+  function setupModals() {
+    const triggers = document.querySelectorAll<HTMLButtonElement>(
+      "[data-modal-target]",
+    );
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const modalId = trigger.dataset.modalTarget;
+        if (!modalId) return;
+
+        const modal = document.getElementById(
+          modalId,
+        ) as HTMLDialogElement | null;
+        if (!modal) return;
+
+        lastTrigger = trigger;
+        modal.showModal();
+      });
+    });
+
+    document
+      .querySelectorAll<HTMLDialogElement>(".payment-modal")
+      .forEach((modal) => {
+        modal.addEventListener("click", (event) => {
+          const rect = modal.getBoundingClientRect();
+          const isBackdropClick =
+            event.clientX < rect.left ||
+            event.clientX > rect.right ||
+            event.clientY < rect.top ||
+            event.clientY > rect.bottom;
+
+          if (isBackdropClick) {
+            modal.close();
+          }
+        });
+
+        modal.addEventListener("close", () => {
+          lastTrigger?.focus();
+          lastTrigger = null;
+        });
+
+        modal.querySelector(".modal-close")?.addEventListener("click", () => {
+          modal.close();
+        });
+      });
+
+    const copyBtn = document.getElementById("copy-alias-btn");
+    const aliasEl = document.getElementById("transfer-alias");
+
+    copyBtn?.addEventListener("click", async () => {
+      const alias = aliasEl?.textContent?.trim();
+      if (!alias) return;
+
+      try {
+        await navigator.clipboard.writeText(alias);
+        copyBtn.textContent = "¡Copiado!";
+        setTimeout(() => {
+          copyBtn.textContent = "Copiar";
+        }, 2000);
+      } catch {
+        copyBtn.textContent = "Error";
+        setTimeout(() => {
+          copyBtn.textContent = "Copiar";
+        }, 2000);
+      }
+    });
+
+    updateInstallmentPlans();
+  }
+
+  setupModals();
+</script>
