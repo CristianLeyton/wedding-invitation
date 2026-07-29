@@ -1,8 +1,5 @@
 ---
-import confirmacion from "../../assets/images/confirmacion.png";
-
 const WHATSAPP_NUMBER = "543874081090";
-const WHATSAPP_DISPLAY = "3874 08-1090";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, confirmo mi asistencia a tu boda!")}`;
 ---
 
@@ -10,11 +7,10 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
   class="bg-bgwhite py-8 px-6 lg:px-8 leading-relaxed text-pretty flex flex-col items-center gap-4 text-center"
 >
   <div
-    class="max-w-200 mx-auto flex flex-col justify-start items-center card text-bgwhite py-10 px-8 corner-shape bg-primary bg-cover bg-no-repeat gap-1 relative"
-    style={`background-image: url(${confirmacion.src}); background-position: center center;`}
+    class="max-w-200 mx-auto flex flex-col justify-start items-center card text-bgwhite py-10 px-8 corner-shape bg-cover bg-no-repeat gap-1 relative"
   >
     <div
-      class="absolute inset-0 bg-[linear-gradient(180deg,#360d13_0%,transparent_50%,#360d13_100%)]"
+      class="absolute corner-shape inset-0 bg-[linear-gradient(180deg,#360d1395_0%,#360d13_30%,#360d13_100%)]"
     >
     </div>
     <h2 class="text-4xl lg:text-5xl 2xl:text-6xl font-bold italic mb-8">
@@ -40,9 +36,16 @@ const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent
 
     <a
       href={WHATSAPP_URL} target="_blank"
-      class="rounded-full text-xl md:text-2xl lg:text-3xl border z-10 border-white px-6 py-3 mt-50 lg:mt-70 hover:bg-black/25 transition"
+      class="rounded-full text-xl md:text-2xl lg:text-3xl border z-10 border-white px-6 py-3 mt-10 hover:bg-black/25 transition"
     >
       CONFIRMAR ASISTENCIA
     </a>
   </div>
 </section>
+
+<style>
+  .corner-shape{
+    border-radius: 30px;
+    corner-shape: scoop;
+  }
+</style>

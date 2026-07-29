@@ -1,13 +1,28 @@
 ---
-
+import epilogo from "../../assets/images/epilogo.jpg";
+import epilogoMobile from "../../assets/images/epilogo_mobile.png";
 ---
 
-<div class="card bg-bgwhite">
-  <div class="bg-linear-180 from-bgwhite to-black h-20"></div>
+<div class="card bg-bgwhite mt-5">
   <section
-    class="bg-black text-bgwhite py-16 px-6 lg:px-8 leading-relaxed text-pretty flex flex-col justify-between items-center h-svh gap-4 text-center"
+    class="bg-bgwhite text-bgwhite py-16 px-6 lg:px-8 leading-relaxed text-pretty flex flex-col justify-between items-center h-svh gap-4 text-center relative"
   >
-    <p class="text-2xl lg:text-3xl max-w-240">
+    <picture
+      class="w-full h-full object-cover absolute inset-0 card z-0 fusion-a-blanco"
+    >
+      <source srcset={epilogo.src} media="(min-width: 1024px)" />
+      <source srcset={epilogoMobile.src} media="(max-width: 1024px)" />
+      <img
+        src={epilogo.src}
+        alt="First image"
+        class="w-full h-full object-cover"
+      />
+    </picture>
+    <div
+      class="absolute inset-0 bg-[linear-gradient(180deg,#00000050_5%,#000000_100%)] fusion-a-blanco"
+    >
+    </div> 
+    <p class="text-2xl lg:text-3xl max-w-240 pt-4">
       "Nosotros creemos que, cuando Dios las une, dejan de ser dos caminos para
       convertirse en una sola historia.”
     </p>
@@ -20,3 +35,22 @@
     </div>
   </section>
 </div>
+
+<style>
+  .fusion-a-blanco {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 2.5%,
+      black 10%,
+      black 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 2.5%,
+      black 10%,
+      black 100%
+    );
+  }
+</style>
