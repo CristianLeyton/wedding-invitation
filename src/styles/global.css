@@ -34,6 +34,10 @@ body, html, * {
     scroll-behavior: smooth;
 }
 
+body, html {
+  background-color: #F9F1E6;
+}
+
 .fadeIn p, .fadeIn h2, .fadeIn h3 {
   animation: fadeIn 0.8s ease-in-out forwards;
 }

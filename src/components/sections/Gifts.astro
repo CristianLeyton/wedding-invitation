@@ -1,5 +1,7 @@
 ---
+import Modal from "../Modal.astro";
 
+const TRANSFER_ALIAS = "brendaycarlos2027";
 ---
 
 <section class="bg-primary text-bgwhite leading-relaxed text-pretty w-full">
@@ -14,7 +16,7 @@
 
     <div class="bg-bgwhite text-primary">
       <div
-        class="container mx-auto px-6 gap-8 flex flex-col justify-center items-center card"
+        class="container mx-auto px-6 gap-8 flex flex-col justify-center items-center card pb-8"
       >
         <h2
           class="text-4xl lg:text-5xl 2xl:text-6xl font-bold italic text-center"
@@ -30,16 +32,50 @@
           este <span class="italic font-bold">nuevo capítulo.</span>
         </p>
 
-        <div class="grid grid-cols-2">
-            <button>
-                Lista de regalos
-            </button>
+        <div class="grid grid-cols-2 gap-8">
+          <button
+            type="button"
+            class="px-4 py-2 bg-primary text-bgwhite hover:bg-primary/80 transition text-xl 2xl:text-3xl cursor-pointer"
+          >
+            Lista de regalos
+          </button>
 
-            <button>
-                Hacer un aporte
-            </button>
+          <button
+            type="button"
+            data-modal-target="modal-aporte"
+            class="px-4 py-2 bg-primary text-bgwhite hover:bg-primary/80 transition text-xl 2xl:text-3xl cursor-pointer"
+          >
+            Hacer un aporte
+          </button>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<Modal id="modal-aporte" title="Hacer un aporte">
+  <p class="text-base lg:text-lg mb-6">
+    Si querés bendecir el inicio de nuestro hogar, podés realizar un aporte
+    mediante <span class="font-bold italic">transferencia bancaria</span> al
+    siguiente alias:
+  </p>
+  <div
+    class="flex items-center justify-between gap-3 border border-primary rounded-xl p-4"
+  >
+    <span
+      id="gift-transfer-alias"
+      class="text-xl lg:text-2xl font-bold font-sans break-all"
+    >
+      {TRANSFER_ALIAS}
+    </span>
+    <button
+      type="button"
+      data-copy-btn
+      data-copy-source="gift-transfer-alias"
+      data-copy-label="Copiar"
+      class="shrink-0 border border-primary px-4 py-2 text-sm font-bold hover:bg-primary hover:text-bgwhite transition-colors cursor-pointer rounded-lg"
+    >
+      Copiar
+    </button>
+  </div>
+</Modal>
