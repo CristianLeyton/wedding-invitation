@@ -79,3 +79,138 @@ const TRANSFER_ALIAS = "brendaycarlos2027";
     </button>
   </div>
 </Modal>
+
+<script>
+  let lastTrigger: HTMLButtonElement | null = null;
+
+  function isPlanAvailableClient(deadlineIso: string): boolean {
+    const deadline = new Date(deadlineIso);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const limit = new Date(
+      deadline.getFullYear(),
+      deadline.getMonth(),
+      deadline.getDate(),
+    );
+    return today <= limit;
+  }
+
+  function updateInstallmentPlans() {
+    const plans = document.querySelectorAll<HTMLLIElement>(".installment-plan");
+    let visibleCount = 0;
+
+    plans.forEach((plan) => {
+      const deadline = plan.dataset.deadline;
+      if (!deadline) return;
+
+      const available = isPlanAvailableClient(deadline);
+      plan.hidden = !available;
+      if (available) visibleCount += 1;
+    });
+
+    const noPlansMessage = document.getElementById("no-plans-message");
+    if (noPlansMessage) {
+      noPlansMessage.hidden = visibleCount > 0;
+    }
+  }
+
+  function setupModals() {
+    const triggers = document.querySelectorAll<HTMLButtonElement>(
+      "[data-modal-target]",
+    );
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const modalId = trigger.dataset.modalTarget;
+        if (!modalId) return;
+
+        const modal = document.getElementById(
+          modalId,
+        ) as HTMLDialogElement | null;
+        if (!modal) return;
+
+        lastTrigger = trigger;
+        modal.showModal();
+      });
+    });
+
+    document
+      .querySelectorAll<HTMLDialogElement>(".payment-modal")
+      .forEach((modal) => {
+        modal.addEventListener("click", (event) => {
+          const rect = modal.getBoundingClientRect();
+          const isBackdropClick =
+            event.clientX < rect.left ||
+            event.clientX > rect.right ||
+            event.clientY < rect.top ||
+            event.clientY > rect.bottom;
+
+          if (isBackdropClick) {
+            modal.close();
+          }
+        });
+
+        modal.addEventListener("close", () => {
+          lastTrigger?.focus();
+          lastTrigger = null;
+        });
+
+        modal.querySelector(".modal-close")?.addEventListener("click", () => {
+          modal.close();
+        });
+      });
+
+    const copyBtn = document.getElementById("copy-alias-btn");
+    const aliasEl = document.getElementById("transfer-alias");
+
+    copyBtn?.addEventListener("click", async () => {
+      const alias = aliasEl?.textContent?.trim();
+      if (!alias) return;
+
+      try {
+        await navigator.clipboard.writeText(alias);
+        copyBtn.textContent = "¡Copiado!";
+        setTimeout(() => {
+          copyBtn.textContent = "Copiar";
+        }, 2000);
+      } catch {
+        copyBtn.textContent = "Error";
+        setTimeout(() => {
+          copyBtn.textContent = "Copiar";
+        }, 2000);
+      }
+    });
+
+    document.querySelectorAll<HTMLButtonElement>("[data-copy-btn]").forEach((btn) => {
+      if (btn.id === "copy-alias-btn") return;
+
+      btn.addEventListener("click", async () => {
+        const sourceId = btn.dataset.copySource;
+        if (!sourceId) return;
+
+        const sourceEl = document.getElementById(sourceId);
+        const text = sourceEl?.textContent?.trim();
+        if (!text) return;
+
+        const defaultLabel = btn.dataset.copyLabel ?? "Copiar";
+
+        try {
+          await navigator.clipboard.writeText(text);
+          btn.textContent = "¡Copiado!";
+          setTimeout(() => {
+            btn.textContent = defaultLabel;
+          }, 2000);
+        } catch {
+          btn.textContent = "Error";
+          setTimeout(() => {
+            btn.textContent = defaultLabel;
+          }, 2000);
+        }
+      });
+    });
+
+    updateInstallmentPlans();
+  }
+
+  setupModals();
+</script>
