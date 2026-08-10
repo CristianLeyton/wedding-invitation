@@ -2,6 +2,27 @@
 import Modal from "../Modal.astro";
 
 const TRANSFER_ALIAS = "brendaycarlos2027";
+
+const GIFTS = [
+  "Licuadora",
+  "Cafetera expresso",
+  "Batidora",
+  "Pava eléctrica",
+  "Freidora de aire",
+  "Plancha vapor de mano",
+  "Dispenser o Purificador de Agua",
+  "Ventilador de pie",
+  "Máquina de pan",
+  "Aspiradora robot o común",
+  "Mini pimer o mixer",
+  "Mesa de luz",
+  "Ropa de cama (sábanas, frazadas, etc.)",
+  "Máquina para hacer pastas",
+  "Picadora de alimentos",
+  "Procesadora",
+  "Cuchillo eléctrico",
+  "Exprimidor de jugo eléctrico",
+];
 ---
 
 <section class="bg-primary text-bgwhite leading-relaxed text-pretty w-full">
@@ -35,6 +56,7 @@ const TRANSFER_ALIAS = "brendaycarlos2027";
         <div class="grid grid-cols-2 gap-8">
           <button
             type="button"
+            data-modal-target="modal-lista-regalos"
             class="px-4 py-2 bg-primary text-bgwhite hover:bg-primary/80 transition text-xl 2xl:text-3xl cursor-pointer"
           >
             Lista de regalos
@@ -78,6 +100,24 @@ const TRANSFER_ALIAS = "brendaycarlos2027";
       Copiar
     </button>
   </div>
+</Modal>
+
+<Modal id="modal-lista-regalos" title="Lista de regalos">
+  <p class="text-base lg:text-lg mb-6">
+    Estos son los regalos que nos encantaría recibir para comenzar nuestro
+    hogar. Sin embargo, <span class="font-bold italic">¡Cualquier aporte es bienvenido!</span>
+  </p>
+  <ul class="flex flex-col gap-2">
+    {
+      GIFTS.map((gift) => (
+        <li
+          class="border border-primary rounded-xl px-4 py-2 text-base lg:text-lg"
+        >
+          {gift}
+        </li>
+      ))
+    }
+  </ul>
 </Modal>
 
 <script>
