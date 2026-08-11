@@ -16,9 +16,11 @@ const WHATSAPP_DISPLAY = "3874 08-1090";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola, adjunto el comprobante de pago de la tarjeta.")}`;
 
 function getPlanDeadline(weddingDate: Date, months: number): Date {
+  // Cada plan está disponible hasta el último día del mes que queda
+  // `months` meses antes de la boda (ej. 5 meses → fin de agosto).
   const deadline = new Date(weddingDate);
   deadline.setMonth(deadline.getMonth() - months);
-  return deadline;
+  return new Date(deadline.getFullYear(), deadline.getMonth() + 1, 0);
 }
 
 function isPlanAvailable(deadline: Date, now = new Date()): boolean {
