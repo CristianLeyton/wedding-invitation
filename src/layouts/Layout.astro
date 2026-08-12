@@ -3,7 +3,7 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -39,6 +39,32 @@ import "../styles/global.css";
     <slot />
   </body>
 </html>
+
+<style>
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: inherit;
+  }
+
+  ::selection {
+    background-color: #360d13;
+    color: #f9f1e6;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+</style>
 
 <script>
   const observer = new IntersectionObserver(
